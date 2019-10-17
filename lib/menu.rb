@@ -14,7 +14,7 @@ class Menu
 	  puts "Et l'autre ?"
 	  print "> "
 	  name2 = gets.chomp
-	  player1 = Player.new(name1)
+	  player1 = Player.new(name1)					#pour initialiser les joueurs en fonction des noms entrés dans les gets.chomp
 	  player2 = Player.new(name2)
 	end
 
@@ -24,4 +24,4 @@ class Menu
 	  reponse = gets.chomp.to_i
 	end
 
-end 
+end
