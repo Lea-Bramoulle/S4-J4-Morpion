@@ -1,87 +1,115 @@
 class Board
-  #TO DO : la classe a 1 attr_accessor : un array/hash qui contient les BoardCases.
-  #Optionnellement on peut aussi lui rajouter un autre sous le nom @count_turn pour compter le nombre de coups joué
-  attr_accessor :plateau, :count_turn
 
+	def initialize
+	  @valeur = []
+  	  tab_position = ["A1","A2","A3","B1","B2","B3","C1","C2","C3"]
+			@tab_win = ["a","b","c","d","e","f","g","h","i"]                   # dès qu'une valeur X ou O est placée, elle est s'injecte dans cetableau et remplace la valeur initiale (nous permet de tester les égalité et donc déterminer s'il y a victoire ou défaite)
 
-  def initialize
+	  i = 0                #au début de la partie on atribu des " " pour que toutesles cases soient vides avant d'être remplies / remplacées par des X ou O
+	  while i < 10
+	    @valeur[i] = " "
+	    i = i + 1
+	  end
 
-    #TO DO :
-    #Quand la classe s'initialize, elle doit créer 9 instances BoardCases
-    #Ces instances sont rangées dans un array/hash qui est l'attr_accessor de la classe
+	@tour_de_jeu = 0
+	 while @tour_de_jeu < 9
 
-    @plateau = []
+  	    puts "    1   2   3".green
+  	    puts "  +---+---+---+".green
+  	    print "A | ".green
+  	    print "#{@valeur[1]}".red
+  	    print " | ".green
+  	    print "#{@valeur[2]}".red
+  	    print " | ".green
+  	    print "#{@valeur[3]}".red
+  	    puts " | ".green
 
+  	    puts "  +---+---+---+".green
+  	    print "B | ".green
+  	    print "#{@valeur[4]}".red
+  	    print " | ".green
+  	    print "#{@valeur[5]}".red
+  	    print " | ".green
+  	    print "#{@valeur[6]}".red
+  	    puts " | ".green
 
-    a1 = BoardCase.new("A1")
-    a2 = BoardCase.new("A2")
-    a3 = BoardCase.new("A3")
-    b1 = BoardCase.new("B1")
-    b2 = BoardCase.new("B2")
-    b3 = BoardCase.new("B3")
-    c1 = BoardCase.new("C1")
-    c2 = BoardCase.new("C2")
-    c3 = BoardCase.new("C3")
+  	    puts "  +---+---+---+".green
+  	    print "C | ".green
+  	    print "#{@valeur[7]}".red
+  	    print " | ".green
+  	    print "#{@valeur[8]}".red
+  	    print " | ".green
+  	    print "#{@valeur[9]}".red
+   	    puts " | ".green
+  	    puts "  +---+---+---+".green
 
-    @plateau << a1.case_id
-    @plateau << a2.case_id
-    @plateau << a3.case_id
-    @plateau << b1.case_id
-    @plateau << b2.case_id
-    @plateau << b3.case_id
-    @plateau << c1.case_id
-    @plateau << c2.case_id
-    @plateau << c3.case_id
+	    puts "Ou veut tu jouer ?"
+	    print "> "
+	    reponse = gets.chomp
+	    z = 1
 
-    puts c3.case_id
+	   tab_position.each do |item|
+  	     if reponse != item
+		z = z + 1
+  	     else
+		system('clear')
+		if @valeur[z] == " "
+		  if @tour_de_jeu % 2 == 0
+		    @valeur[z] = "X"
+				@tab_win[z] = "X"
+		  else
+		    @valeur[z] = "O"
+				@tab_win[z] = "O"
+		  end
+		  @tour_de_jeu = @tour_de_jeu + 1
+		else
+		    system('clear')
+		    puts "La place est deja prise !"
+	        end
+       	     end
 
-
-  end
-
-  def play_turn
-    #TO DO : une méthode qui :
-    #1) demande au bon joueur ce qu'il souhaite faire
-
-    puts " où souhaites-tu placer ton symbole ? (choisi entre a1 et c3)"
-    @case_id = gets.chomp.to_s
-
-      i = 0
-      @count_turn = 0
-      tab = []
-
-      while i < @plateau.size
-
-        if plateau[i] == @case_id
-          if  @count_turn%2 == 0
-            hash = Hash.new
-            hash[plateau[i]] = "X"
-            tab << hash
-          else plateau[i] == @case_id
-            hash = Hash.new
-            hash[plateau[i]] = "O"
-            tab << hash
-          end
-        end
-        i = i +1
-        @count_turn +=1
-      end
-
-      puts tab
-
-    #2) change la BoardCase jouée en fonction de la valeur du joueur (X ou O)
-
-
-  end
+	  end
 
 
 
-  def victory?
-    #TO DO : une méthode qui vérifie le plateau et indique s'il y a un vainqueur ou match nul
 
-    puts tab[0]
+	if @tab_win[1] == @tab_win[2] && @tab_win[3] == @tab_win[1]    #permet de tester une égalité de victoire
+		 puts "vainqueur : 1 2 3 "
+		 		@tour_de_jeu = 11                                        #s'il y a victoire, on passele tour de jeu à 11 pour sortir de laboucle précédente et donc arreter la partie
 
+	elsif @tab_win[4] == @tab_win[5] && @tab_win[6] == @tab_win[4]
+		puts "vainqueur : 4 5 6 "
+		@tour_de_jeu = 11
 
+	elsif @tab_win[7] == @tab_win[8] && @tab_win[9] == @tab_win[7]
+		puts "vainqueur : 7 8 9 "
+		@tour_de_jeu = 11
 
-  end
+	elsif @tab_win[1] == @tab_win[4] && @tab_win[7] == @tab_win[1]
+		puts "vainqueur : 1 4 7 "
+		@tour_de_jeu = 11
 
+	elsif @tab_win[2] == @tab_win[5] && @tab_win[8] == @tab_win[2]
+		puts "vainqueur : 2 5 8 "
+		@tour_de_jeu = 11
+
+	elsif @tab_win[3] == @tab_win[6] && @tab_win[9] == @tab_win[3]
+		puts "vainqueur : 3 6 9 "
+		@tour_de_jeu = 11
+
+	elsif @tab_win[1] == @tab_win[5] && @tab_win[9] == @tab_win[1]
+		puts "vainqueur : 1 5 9 "
+		@tour_de_jeu = 11
+
+	elsif @tab_win[3] == @tab_win[5] && @tab_win[7] == @tab_win[3]
+		puts "vainqueur : 3 5 7 "
+		@tour_de_jeu = 11
+end
+end
+
+if @tour_de_jeu == 9              #S'il n'y a pas de victoire avantle tour 9, il y a donc égalité et aucun gagnant.
+	puts "Egalite"
+end
+
+end
 end
