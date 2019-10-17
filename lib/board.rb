@@ -43,7 +43,7 @@ class Board
    	    puts " | ".green
   	    puts "  +---+---+---+".green
 
-	    puts "Ou veut tu jouer ?"
+	    puts "Sur quelle case souhaites-tu jouer frr ? (A1 à C3)"
 	    print "> "
 	    reponse = gets.chomp
 	    z = 1
@@ -63,7 +63,7 @@ class Board
 		  end
 		  @tour_de_jeu = @tour_de_jeu + 1
 		else
-		    system('clear')
+
 		    puts "La place est deja prise !"
 	        end
        	     end
@@ -74,41 +74,41 @@ class Board
 
 
 	if @tab_win[1] == @tab_win[2] && @tab_win[3] == @tab_win[1]    #permet de tester une égalité de victoire
-		 puts "vainqueur : 1 2 3 "
+		 puts "La partie est terminée ! Vainueur en A1 A2 A3"
 		 		@tour_de_jeu = 11                                        #s'il y a victoire, on passele tour de jeu à 11 pour sortir de laboucle précédente et donc arreter la partie
 
 	elsif @tab_win[4] == @tab_win[5] && @tab_win[6] == @tab_win[4]
-		puts "vainqueur : 4 5 6 "
+		puts "La partie est terminée ! Vainueur en B1 B2 B3 "
 		@tour_de_jeu = 11
 
 	elsif @tab_win[7] == @tab_win[8] && @tab_win[9] == @tab_win[7]
-		puts "vainqueur : 7 8 9 "
+		puts "La partie est terminée ! Vainueur en C1 C2 C3 "
 		@tour_de_jeu = 11
 
 	elsif @tab_win[1] == @tab_win[4] && @tab_win[7] == @tab_win[1]
-		puts "vainqueur : 1 4 7 "
+		puts "La partie est terminée ! Vainueur en : A1 B1 C1 "
 		@tour_de_jeu = 11
 
 	elsif @tab_win[2] == @tab_win[5] && @tab_win[8] == @tab_win[2]
-		puts "vainqueur : 2 5 8 "
+		puts "La partie est terminée ! Vainueur en A2 B2 C2 "
 		@tour_de_jeu = 11
 
 	elsif @tab_win[3] == @tab_win[6] && @tab_win[9] == @tab_win[3]
-		puts "vainqueur : 3 6 9 "
+		puts "La partie est terminée ! Vainueur en : A3 B3 C3 "
 		@tour_de_jeu = 11
 
 	elsif @tab_win[1] == @tab_win[5] && @tab_win[9] == @tab_win[1]
-		puts "vainqueur : 1 5 9 "
+		puts "La partie est terminée ! Vainueur en A1 B2 C3 "
 		@tour_de_jeu = 11
 
 	elsif @tab_win[3] == @tab_win[5] && @tab_win[7] == @tab_win[3]
-		puts "vainqueur : 3 5 7 "
+		puts "vLa partie est terminée ! Vainueur en : A3 B2 C1 "
 		@tour_de_jeu = 11
 end
 end
 
 if @tour_de_jeu == 9              #S'il n'y a pas de victoire avantle tour 9, il y a donc égalité et aucun gagnant.
-	puts "Egalite"
+	puts "Il y a égalité les frères. Vous êtes des noobs"
 end
 
 end
